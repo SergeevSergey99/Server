@@ -3,8 +3,8 @@ import java.io.*;
 
 public class Server {
     public static void main(String[] args) {
-        int port = 3247;
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
+        final int PORT = 3247;
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server started");
             System.out.println("Waiting for client...");
 
