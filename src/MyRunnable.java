@@ -1,9 +1,8 @@
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class MyRunnable implements Runnable {
-    Socket socket;
+    private Socket socket;
 
     MyRunnable(Socket socket) {
         this.socket = socket;
@@ -28,7 +27,8 @@ public class MyRunnable implements Runnable {
                 if (line.equals("exit")) {
                     System.out.println("end Thread");
                     break;
-                };
+                }
+
                 System.out.println(line);
                 System.out.println(this.getName() + " sending answer...");
 
@@ -44,7 +44,7 @@ public class MyRunnable implements Runnable {
 
     }
 
-    public String getName() {
+    private String getName() {
         return Thread.currentThread().getName();
     }
 }
