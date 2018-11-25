@@ -1,38 +1,30 @@
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
-    public static void main(String[] args) {
-        final int PORT = 3247;
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("Server started");
-            System.out.println("Waiting for client...");
+    final static int PORT = 3247;
+    public static void main(String[] args) throws IOException {
+/*
+        Thread thread[] = new Thread[5];
 
+        for (int i = 0; i < thread.length; i++) {
+            thread[i] = new Thread(new MyRunnable(), "Thread" + i);
+            thread[i].setPriority(Thread.MAX_PRIORITY);
+
+            thread[i].start();
+            System.out.println(thread[i].getName() + " started");
+        }*/
+
+
+        ServerSocket serverSocket = new ServerSocket(PORT);
+
+        //noinspection InfiniteLoopStatement
+        while (true) {
             Socket socket = serverSocket.accept();
+            Thread thread = new Thread(new MyRunnable(socket));
+            thread.start();
 
-            System.out.println("Someone found me!");
-
-            InputStream inputStream = socket.getInputStream();
-            OutputStream outputStream = socket.getOutputStream();
-
-            DataInputStream dataInputStream = new DataInputStream(inputStream);
-            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-
-            String line;
-            //noinspection InfiniteLoopStatement
-            while (true) {
-                line = dataInputStream.readUTF();
-                System.out.println(line);
-                System.out.println("sending answer...");
-
-                dataOutputStream.writeUTF("Your line:" + line + "; My answer: Cool Server!");
-                dataOutputStream.flush();
-
-                System.out.println("Waiting for next line...");
-                System.out.println();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
