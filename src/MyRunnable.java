@@ -23,13 +23,13 @@ public class MyRunnable implements Runnable {
 
             String line;
 
-            File dir = new File("C:\\Users\\MSI\\Google Диск\\ДЗ\\2 курс\\физика\\lab");
+            File dir = new File(".");
 
             //noinspection InfiniteLoopStatement
             while (true) {
                 line = dataInputStream.readUTF();
 
-                System.out.println(line);
+                System.out.println("command: " + line);
                 System.out.println(this.getName() + " sending answer...");
 
                 if (line.equals("exit")) {
@@ -40,6 +40,7 @@ public class MyRunnable implements Runnable {
                     line = Arrays.toString(dir.list());
                     System.out.println(line);
                 }
+
 
 
                 dataOutputStream.writeUTF(line);
