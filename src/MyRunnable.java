@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class MyRunnable implements Runnable {
     private Socket socket;
@@ -21,18 +22,27 @@ public class MyRunnable implements Runnable {
             DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
             String line;
+
+            File dir = new File("C:\\Users\\MSI\\Google Диск\\ДЗ\\2 курс\\физика\\lab");
+
             //noinspection InfiniteLoopStatement
             while (true) {
                 line = dataInputStream.readUTF();
-                if (line.equals("exit")) {
-                    System.out.println("end Thread");
-                    break;
-                }
 
                 System.out.println(line);
                 System.out.println(this.getName() + " sending answer...");
 
-                dataOutputStream.writeUTF("Your line:" + line + "; My answer: Cool Server!");
+                if (line.equals("exit")) {
+                    System.out.println("end Thread");
+                    break;
+                }
+                if (line.equals("ls")) {
+                    line = Arrays.toString(dir.list());
+                    System.out.println(line);
+                }
+
+
+                dataOutputStream.writeUTF(line);
                 dataOutputStream.flush();
 
                 System.out.println(this.getName() + " waiting for next line...");
