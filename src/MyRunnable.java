@@ -41,8 +41,6 @@ public class MyRunnable implements Runnable {
                     System.out.println(line);
                 }
 
-
-
                 dataOutputStream.writeUTF(line);
                 dataOutputStream.flush();
 
