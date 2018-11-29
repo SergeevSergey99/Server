@@ -1,5 +1,7 @@
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class MyRunnable implements Runnable {
@@ -39,6 +41,13 @@ public class MyRunnable implements Runnable {
                 if (line.equals("ls")) {
                     line = Arrays.toString(dir.list());
                     System.out.println(line);
+                }
+
+                if (line.equals("download")) {
+                    //  String f = Files.readAllLines()
+                    byte[] fileContent = Files.readAllBytes(Paths.get(".\\src\\text.txt"));
+                    line = Arrays.toString(fileContent);
+                    System.out.println(Arrays.toString(fileContent));
                 }
 
                 dataOutputStream.writeUTF(line);
