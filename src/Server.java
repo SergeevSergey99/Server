@@ -3,7 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    final static int PORT = 3247;
+    final static private int PORT = 3247;
     public static void main(String[] args) throws IOException {
 /*
         Thread thread[] = new Thread[5];
@@ -15,7 +15,6 @@ public class Server {
             thread[i].start();
             System.out.println(thread[i].getName() + " started");
         }*/
-
 
         ServerSocket serverSocket = new ServerSocket(PORT);
 

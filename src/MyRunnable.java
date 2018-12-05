@@ -46,7 +46,7 @@ public class MyRunnable implements Runnable {
                 if (line.equals("download")) {
                     //  String f = Files.readAllLines()
                     byte[] fileContent = Files.readAllBytes(Paths.get(".\\src\\text.txt"));
-                    line = Arrays.toString(fileContent);
+                    line = new String(fileContent);
                     System.out.println(Arrays.toString(fileContent));
                 }
 
