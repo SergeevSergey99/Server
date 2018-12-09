@@ -24,7 +24,7 @@ public class MyRunnable implements Runnable {
             DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
             String line;
-            File dir = new File(".");
+            File dir = new File(".\\files");
 
             //noinspection InfiniteLoopStatement
             while (true) {
@@ -45,7 +45,8 @@ public class MyRunnable implements Runnable {
                 if (line.substring(0, 8).equals("download")) {
                     //  String f = Files.readAllLines()
                     String fileName = line.substring(9);
-                    byte[] fileContent = Files.readAllBytes(Paths.get(".\\src\\"+fileName));
+
+                    byte[] fileContent = Files.readAllBytes(Paths.get(dir.getPath()+"\\"+fileName));
                     line = new String(fileContent);
                     System.out.println(Arrays.toString(fileContent));
                 }
