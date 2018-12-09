@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class MyRunnable implements Runnable {
@@ -42,13 +41,16 @@ public class MyRunnable implements Runnable {
                     System.out.println(line);
                 }
 
-                if (line.substring(0, 8).equals("download")) {
+                if (line.toLowerCase().startsWith("download")) {
+//                if (line.substring(0, 8).equals("download")) {
                     //  String f = Files.readAllLines()
                     String fileName = line.substring(9);
-
-                    byte[] fileContent = Files.readAllBytes(Paths.get(dir.getPath()+"\\"+fileName));
-                    line = new String(fileContent);
-                    System.out.println(Arrays.toString(fileContent));
+                    File file = new File(dir.getPath() + "\\" + fileName);
+                    if (file.exists()) {
+                        byte[] fileContent = Files.readAllBytes(file.toPath());
+                        line = new String(fileContent);
+                        System.out.println(Arrays.toString(fileContent));
+                    } else line = "Error!: Stupid user.";
                 }
 
                 dataOutputStream.writeUTF(line);
